@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Jumbotron Header -->
+<header class="jumbotron my-4">
+    <h1 id="ingredient" class="display-3">{{ ingredient.strIngredient }}</h1>
+    <p class="lead">(Incomplete page) Here is all of the details about the {{ ingredient.strIngredient }}!</p>
+    {% if g.user %}
+    <div class="container" id="saves">
+        {% if saved %}
+        <button data-id="{{ ingredient.strIngredient }}" class="btn btn-danger saveIngredient">Remove Save</button>
+        {% else %}
+        <button data-id="{{ ingredient.strIngredient }}" class="btn btn-primary saveIngredient">Save to you
+            favorites!</button>
+        {% endif %}
+    </div>
+    {% endif %}
+</header>
+
+<!-- Page Features -->
+<div class="container">
+    <div class="h3">Details</div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Name: {{ingredient.strIngredient}}</li>
+        <li class="list-group-item">Type: {{ingredient.strType}}</li>
+        <li class="list-group-item">Alcoholic: {{ingredient.strAlcohol}}</li>
+        <li class="list-group-item">ABV: {{ingredient.strABV}}</li>
+        <li class="list-group-item">{{ ingredient.strDescription }}</li>
+    </ul>
+</div>
+
+<!-- recs -->
+{% if recs %}
+<div class="container text-center">
+    <h3 class="text-left">Recipes with {{ingredient.strIngredient}}:</h3>
+</div>
+<div class="row text-center">
+    {% for drink in recs %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <img class="card-img-top" src="{{ drink.strDrinkThumb }}" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{ drink.strDrink }}</h4>
+                <p class="card-text">{{ drink.strInstructions[0:150] + "..." }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="/drinks/{{ drink.idDrink }}" class="btn btn-primary">Find Out More!</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+{% endblock%}

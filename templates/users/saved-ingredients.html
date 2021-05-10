@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Jumbotron Header -->
+{% if saved_ingredients %}
+<header class="jumbotron my-5">
+    <h1 class="display-3">Hi, {{ g.user.username }}</h1>
+    <p class="lead">Here is a list of all of your saved ingredients </p>
+</header>
+
+<!-- Your Saved ingredients -->
+<div class="container text-center">
+    <h3 class="text-left">Saved ingredients ({{ saved_ingredients | length }})</h3>
+</div>
+<div class="row text-center overflow-auto">
+    {% for ingredient in saved_ingredients %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <img class="card-img-top" src="/static/images/default-ingredient.jpeg" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{ ingredient.strIngredient }}</h4>
+                <p class="card-text">{{ ingredient.strDescription[0:150] + "..."}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="/ingredients/{{ ingredient.strIngredient }}" class="btn btn-primary m-2">See details!</a>
+                <button data-id="{{ ingredient.strIngredient }}" class="btn btn-danger saveIngredient">Remove
+                    Save</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+<header class="jumbotron my-5">
+    <h1 class="display-3">Hi, {{ g.user.username }}</h1>
+    <p class="lead">It looks like you haven't saved any ingredients yet. Take a look around the site and have save what
+        looks tasty to you!</p>
+    <a href="/" class="btn btn-success">Home</a>
+</header>
+
+{% endif %}
+
+
+{% endblock %}

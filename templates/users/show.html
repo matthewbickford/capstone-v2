@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Jumbotron Header -->
+<header class="jumbotron my-5">
+    <h1 class="display-3">Hi, {{ user.username }}</h1>
+    <p class="lead">Below you will be able to see your saved recipes, look at your recently viewed drinks and
+        ingredients, and create your own recipes. </p>
+    <a href="/users/new-drink" class="btn btn-success">Create Your Own</a>
+</header>
+
+
+<!-- Your Saved Recipes -->
+{% if saved_drinks %}
+<div class="container text-center">
+    <a class="h3" href="users/saved-drinks">Saved Drinks ({{ saved_drinks | length }})</a>
+</div>
+<div class="row text-center">
+    {% for drink in saved_drinks[0:4] %}
+    <div class="col-lg-3 col-md-6 mb-4 overflow-auto">
+        <div class="card h-100">
+            <img class="card-img-top" src="{{ drink.strDrinkThumb }}" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{drink.strDrink}}</h4>
+                <p class="card-text">{{drink.strInstructions}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="/drinks/{{ drink.idDrink }}" class="btn btn-primary m-2">See the recipe!</a>
+                <button data-id="{{drink.idDrink}}" class="btn btn-danger saveDrink">Remove Save</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<!-- Your Saved ingredients -->
+{% if saved_ingredients %}
+<div class="container text-center">
+    <a class="h3" href="users/saved-ingredients">Saved ingredients ({{ saved_ingredients | length }})</a>
+</div>
+<div class="row text-center overflow-auto">
+    {% for ingredient in saved_ingredients[0:4] %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <img class="card-img-top" src="/static/images/default-ingredient.jpeg" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{ ingredient.strIngredient }}</h4>
+                <p class="card-text">{{ ingredient.strDescription[0:150] + "..."}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="/ingredients/{{ ingredient.strIngredient }}" class="btn btn-primary m-2">See details!</a>
+                <button data-id="{{ ingredient.strIngredient }}" class="btn btn-danger saveIngredient">Remove
+                    Save</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+{% if recents %}
+<div class="container text-center">
+    <a class="h3" href="/users/recent">Your recently viewed drinks</a>
+</div>
+<div class="row text-center">
+    {% for drink in recents[0:4] %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <img class="card-img-top" src="{{ drink.strDrinkThumb }}" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{ drink.strDrink }}</h4>
+                <p class="card-text">{{ drink.strInstructions[0:150] + "..." }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="/drinks/{{ drink.idDrink }}" class="btn btn-primary">Find Out More!</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<!-- Your Original Recipe -->
+{% if ogs %}
+<div class="container text-center">
+    <a class="text-left h3" href="users/originals">Your Original Recipes ({{ ogs | length }})</a>
+</div>
+<div class="row text-center">
+    {% for drink in ogs[0:4] %}
+    <div class="col-lg-3 col-md-6 mb-4 overflow-auto">
+        <div class="card h-100">
+            <img class="card-img-top" src="{{ drink.strDrinkThumb }}" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{drink.strDrink}}</h4>
+                <p class="card-text">{{drink.strInstructions}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="/originals/{{ drink.idDrink }}" class="btn btn-primary m-2">See the recipe!</a>
+                <button data-id="{{drink.idDrink}}" class="btn btn-danger saveDrink">Remove Save</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+{% if recs %}
+<div class="container text-center">
+    <h3 class="text-left">You may also enjoy...</h3>
+</div>
+<div class="row text-center">
+    {% for drink in recs %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <img class="card-img-top" src="{{ drink.strDrinkThumb }}" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{ drink.strDrink }}</h4>
+                <p class="card-text">{{ drink.strInstructions[0:150] + "..." }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="/drinks/{{ drink.idDrink }}" class="btn btn-primary">Find Out More!</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+{% endblock %}

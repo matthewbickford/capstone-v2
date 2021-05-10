@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Jumbotron Header -->
+<header class="jumbotron my-4">
+    <h1 class="display-3">A Warm Welcome!</h1>
+    <p class="lead">The Cocktail Curator you online cocktail recipe reference. Users can look up thousands
+        of drink recipes, save their favorites, and generate recommendations based on what they like. To get
+        started, select from one of our featured cocktails below, search for one our your favorites, or create your own.
+    </p>
+    {% if not g.user %}
+    <a href="/users/login" class="btn btn-primary">Log in to start mixing...</a>
+    {% else %}
+    <a href="/users/{{ g.user.id }}" class="btn btn-primary">See your saved recipes</a>
+    <a href="/users/new-drink" class="btn btn-success">Create Your Own</a>
+    {% endif %}
+</header>
+
+
+<div class="container text-center">
+    <h3 class="text-left">A few recipes to peak your interest...</h3>
+</div>
+<div class="row text-center">
+    {% for drink in randoms %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <img class="card-img-top" src="{{ drink.strDrinkThumb }}" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{ drink.strDrink }}</h4>
+                <p class="card-text">{{ drink.strInstructions[0:150] + "..." }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="/drinks/{{ drink.idDrink }}" class="btn btn-primary">Find Out More!</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
