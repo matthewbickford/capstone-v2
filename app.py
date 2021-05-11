@@ -398,7 +398,7 @@ def search():
     """Handle GET requests for search terms"""
 
     term = request.args["q"]
-    res = get_drink_by_name(term)
+    res = get_drinks_by_name(term)
 
     return render_template('/search.html',
                            term=term,
@@ -408,6 +408,12 @@ def search():
 ##############################################################################
 # Homepage and error pages
 
+
+@app.route('/')
+def show_homepage():
+    """Show hompage"""
+
+    return render_template('/home.html', randoms=get_random_drinks())
 
 ##############################################################################
 # Turn off all caching in Flask2
@@ -429,6 +435,13 @@ def add_header(req):
 
 
 API_BASE_URL = "http://www.thecocktaildb.com/api/json/v1/1/"
+
+
+def get_drinks_by_name(name):
+    """Look up a list of drinks by name"""
+
+    res = requests.get(f"{API_BASE_URL}search.php?s={name}")
+    return res.json()['drinks']
 
 
 def get_drink_by_id(idDrink):
