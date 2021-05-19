@@ -1,5 +1,4 @@
-const BASE_URL = "http://127.0.0.1:5000/";
-
+const BASE_URL = `${window.location.host}/`;
 
 $('.saveDrink').on('click', async function (e) {
     let id = $(this).data('id')
@@ -31,3 +30,5 @@ $('.deleteOg').on('click', async function (e) {
         return
     }
 })
+
+
