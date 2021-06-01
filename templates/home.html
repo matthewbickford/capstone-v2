@@ -11,8 +11,9 @@
     {% if not g.user %}
     <a href="/users/login" class="btn btn-primary">Log in to start mixing...</a>
     {% else %}
-    <a href="/users/{{ g.user.id }}" class="btn btn-primary">See your saved recipes</a>
-    <a href="/users/new-drink" class="btn btn-success">Create Your Own</a>
+    <a href="/users/{{ g.user.id }}" class="btn btn-primary">Saved Recipes</a>
+    <a href="/users/saved-ingredients" class="btn btn-primary">Saved Ingredients</a>
+    <a href="/users/new-drink" class="btn btn-primary">Create Your Own</a>
     {% endif %}
 </header>
 

@@ -25,19 +25,14 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="/">Cocktail Curator</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto mt-4">
                         <form class="navbar-form navbar-right" action="/search">
                             <input name="q" class="form-control" placeholder="Search By Name..." id="search">
                             <button class="btn btn-default">
                                 <span class="fa fa-search"></span>
                             </button>
                         </form>
-
 
                         <li class="nav-item active">
                             <a class="nav-link" href="/">Home
@@ -69,15 +64,6 @@
             </div>
         </nav>
 
-        {% if g.user %}
-        <div class="sidenav">
-            <h3>Quick Links</h3>
-            <a href="/users/saved-drinks"> Saved Drinks</a>
-            <a href="/users/saved-ingredients">Saved Ingredients</a>
-            <a href="/users/originals">Your Original Recipes</a>
-            <a href="/users/recent">Recently Viewed</a>
-        </div>
-        {% endif %}
 
         <!-- Page Content -->
         <div class="container flash mt-5 pt-5">
