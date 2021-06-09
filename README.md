@@ -3,6 +3,13 @@
 ## About
 The site can be found at https://cocktail-curator.herokuapp.com/. The goal of the project was to build a database-driven full CRUD website off an external API. 
 
+## Setup
+After cloning the repository, you may run the applicaiton locally after installing:
+* Python 3 or later
+* PostgreSQL 13 or later
+* Installing the contentst of requirements.txt
+* Starting a local server via Flask
+
 ## Features
 * Search the database for cocktail recipes and ingredients.
 * Favorite and save recipes and ingredients to the users' page. 
